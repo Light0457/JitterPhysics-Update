@@ -346,97 +346,6 @@ namespace Jitter.Collision
         // it also gives the hits in order but the startposition problem
         // is unsolved - so it starts from outside the broadphase.
 
-        #region Depricated
-        //public void QueryRay(HashSet<IBroadphaseEntity> entities,JVector rayOrigin, JVector rayDirection)
-        //{
-        //    rayDirection.Normalize();
-
-        //    int index1 = 0,index2 = 0,index3 = 0;
-
-        //    if (rayDirection.X < 0.0f) index1 = axis1.Count - 1;
-        //    if (rayDirection.Y < 0.0f) index2 = axis2.Count - 1;
-        //    if (rayDirection.Z < 0.0f) index3 = axis3.Count - 1;
-
-        //    int steps = 0;
-
-        //    while (true)
-        //    {
-        //        steps++;
-        //        float distance1 = (axis1[index1].Value - rayOrigin.X) / rayDirection.X;
-        //        float distance2 = (axis2[index2].Value - rayOrigin.Y) / rayDirection.Y;
-        //        float distance3 = (axis3[index3].Value - rayOrigin.Z) / rayDirection.Z;
-
-
-        //        float dist1 = Math.Abs(distance1);
-        //        float dist2 = Math.Abs(distance2);
-        //        float dist3 = Math.Abs(distance3);
-
-        //        if (dist1 < dist2)
-        //        {
-        //            if (dist3 < dist1)
-        //            {
-
-        //                if (axis3[index3].Begin)
-        //                {
-        //                    if (axis3[index3].Body.BoundingBox.RayIntersect(rayOrigin, rayDirection)) entities.Add(axis3[index3].Body);
-        //                }
-
-        //                rayOrigin = rayOrigin + distance3 * rayDirection;
-
-        //                index3 += (rayDirection.Z > 0.0f) ? 1 : -1;
-        //                if (index3 >= axis3.Count || index3 < 0) break;
-                       
-        //            }
-        //            else
-        //            {
-
-        //                if (axis1[index1].Begin)
-        //                {
-        //                    if (axis1[index1].Body.BoundingBox.RayIntersect(rayOrigin, rayDirection)) entities.Add(axis1[index1].Body);
-        //                }
-
-        //                rayOrigin = rayOrigin + distance1 * rayDirection;
-
-        //                index1 += (rayDirection.X > 0.0f) ? 1 : -1;
-        //                if (index1 >= axis1.Count || index1 < 0) break;
-        //            }
-        //        }
-        //        else
-        //        {
-        //            if (dist2 < dist3)
-        //            {
-        //                if (axis2[index2].Begin)
-        //                {
-        //                    if (axis2[index2].Body.BoundingBox.RayIntersect(rayOrigin, rayDirection)) entities.Add(axis2[index2].Body);
-        //                }
-
-        //                rayOrigin = rayOrigin + distance2 * rayDirection;
-
-        //                index2 += (rayDirection.Y > 0.0f) ? 1 : -1;
-        //                if (index2 >= axis2.Count || index2 < 0) break;
-
-        //            }
-        //            else
-        //            {
-
-        //                if (axis3[index3].Begin)
-        //                {
-        //                    if (axis3[index3].Body.BoundingBox.RayIntersect(rayOrigin, rayDirection)) entities.Add(axis3[index3].Body);
-        //                }
-
-        //                rayOrigin = rayOrigin + distance3 * rayDirection;
-
-        //                index3 += (rayDirection.Z > 0.0f) ? 1 : -1;
-        //                if (index3 >= axis3.Count || index3 < 0) break;
-        //            }
-        //        }
-        //    }
-
-        //    System.Diagnostics.Debug.WriteLine(steps);
-        //}
-        #endregion
-
-
         /// <summary>
         /// Sends a ray (definied by start and direction) through the scene (all bodies added).
         /// NOTE: For performance reasons terrain and trianglemeshshape aren't checked
@@ -512,9 +421,9 @@ namespace Jitter.Collision
                 JVector tempNormal;float tempFraction;
                 bool multiShapeCollides = false;
 
-                JVector transformedOrigin; JVector.Subtract(ref rayOrigin, ref body.position, out transformedOrigin);
+                JVector.Subtract(ref rayOrigin, ref body.position, out var transformedOrigin);
                 JVector.Transform(ref transformedOrigin, ref body.invOrientation, out transformedOrigin);
-                JVector transformedDirection; JVector.Transform(ref rayDirection, ref body.invOrientation, out transformedDirection);
+                JVector.Transform(ref rayDirection, ref body.invOrientation, out var transformedDirection);
 
                 int msLength = ms.Prepare(ref transformedOrigin, ref transformedDirection);
 
