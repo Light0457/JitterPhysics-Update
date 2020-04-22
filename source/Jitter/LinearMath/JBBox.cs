@@ -104,17 +104,15 @@ namespace Jitter.LinearMath
             JVector.Subtract(ref Max, ref position, out Max);
             JVector.Subtract(ref Min, ref position, out Min);
 
-            JVector center;
-            JVector.Add(ref Max, ref Min, out center);
+            JVector.Add(ref Max, ref Min, out var center);
             center.X *= 0.5f; center.Y *= 0.5f; center.Z *= 0.5f;
 
-            JVector halfExtents;
-            JVector.Subtract(ref Max, ref Min, out halfExtents);
+            JVector.Subtract(ref Max, ref Min, out var halfExtents);
             halfExtents.X *= 0.5f; halfExtents.Y *= 0.5f; halfExtents.Z *= 0.5f;
 
             JVector.TransposedTransform(ref center, ref orientation, out center);
 
-            JMatrix abs; JMath.Absolute(ref orientation, out abs);
+            JMath.Absolute(ref orientation, out var abs);
             JVector.TransposedTransform(ref halfExtents, ref abs, out halfExtents);
 
             JVector.Add(ref center, ref halfExtents, out Max);
@@ -128,7 +126,7 @@ namespace Jitter.LinearMath
 
             JVector.Transform(ref center, ref orientation, out center);
 
-            JMatrix abs; JMath.Absolute(ref orientation, out abs);
+            JMath.Absolute(ref orientation, out var abs);
             JVector.Transform(ref halfExtents, ref abs, out halfExtents);
 
             Max = center + halfExtents;
@@ -235,14 +233,19 @@ namespace Jitter.LinearMath
 
         public void GetCorners(JVector[] corners)
         {
-            corners[0].Set(this.Min.X, this.Max.Y, this.Max.Z);
+            /*corners[0].Set(this.Min.X, this.Max.Y, this.Max.Z);
             corners[1].Set(this.Max.X, this.Max.Y, this.Max.Z);
             corners[2].Set(this.Max.X, this.Min.Y, this.Max.Z);
             corners[3].Set(this.Min.X, this.Min.Y, this.Max.Z);
             corners[4].Set(this.Min.X, this.Max.Y, this.Min.Z);
             corners[5].Set(this.Max.X, this.Max.Y, this.Min.Z);
             corners[6].Set(this.Max.X, this.Min.Y, this.Min.Z);
-            corners[7].Set(this.Min.X, this.Min.Y, this.Min.Z);
+            corners[7].Set(this.Min.X, this.Min.Y, this.Min.Z);*/
+
+            for(int i = 0; i < 7; i++)
+            {
+                corners[i].Set(Max.X, Min.Y, Min.Z);
+            }
         }
 
         #endregion
@@ -255,8 +258,8 @@ namespace Jitter.LinearMath
 
         public void AddPoint(ref JVector point)
         {
-            JVector.Max(ref this.Max, ref point, out this.Max);
-            JVector.Min(ref this.Min, ref point, out this.Min);
+            JVector.Max(ref Max, ref point, out Max);
+            JVector.Min(ref Min, ref point, out Min);
         }
 
         /// <summary>
@@ -324,8 +327,7 @@ namespace Jitter.LinearMath
 
         public static JBBox CreateMerged(JBBox original, JBBox additional)
         {
-            JBBox result;
-            JBBox.CreateMerged(ref original, ref additional, out result);
+            CreateMerged(ref original, ref additional, out var result);
             return result;
         }
 
@@ -337,10 +339,8 @@ namespace Jitter.LinearMath
         /// <param name="result">A JBBox containing the two given boxes.</param>
         public static void CreateMerged(ref JBBox original, ref JBBox additional, out JBBox result)
         {
-            JVector vector;
-            JVector vector2;
-            JVector.Min(ref original.Min, ref additional.Min, out vector2);
-            JVector.Max(ref original.Max, ref additional.Max, out vector);
+            JVector.Min(ref original.Min, ref additional.Min, out var vector2);
+            JVector.Max(ref original.Max, ref additional.Max, out var vector);
             result.Min = vector2;
             result.Max = vector;
         }
