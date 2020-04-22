@@ -200,8 +200,7 @@ namespace Jitter.LinearMath
         #region public static JQuaternion Multiply(JQuaternion quaternion1, float scaleFactor)
         public static JQuaternion Multiply(JQuaternion quaternion1, float scaleFactor)
         {
-            JQuaternion result;
-            JQuaternion.Multiply(ref quaternion1, scaleFactor, out result);
+            Multiply(ref quaternion1, scaleFactor, out var result);
             return result;
         }
 
@@ -226,12 +225,12 @@ namespace Jitter.LinearMath
         #region public void Normalize()
         public void Normalize()
         {
-            float num2 = (((this.X * this.X) + (this.Y * this.Y)) + (this.Z * this.Z)) + (this.W * this.W);
-            float num = 1f / ((float)Math.Sqrt((double)num2));
-            this.X *= num;
-            this.Y *= num;
-            this.Z *= num;
-            this.W *= num;
+            float num2 = (((X * X) + (Y * Y)) + (Z * Z)) + (W * W);
+            float num = 1f / ((float)Math.Sqrt(num2));
+            X *= num;
+            Y *= num;
+            Z *= num;
+            W *= num;
         }
         #endregion
 
@@ -243,8 +242,7 @@ namespace Jitter.LinearMath
         #region public static JQuaternion CreateFromMatrix(JMatrix matrix)
         public static JQuaternion CreateFromMatrix(JMatrix matrix)
         {
-            JQuaternion result;
-            JQuaternion.CreateFromMatrix(ref matrix, out result);
+            CreateFromMatrix(ref matrix, out var result);
             return result;
         }
 
@@ -304,8 +302,7 @@ namespace Jitter.LinearMath
         #region public static float operator *(JQuaternion value1, JQuaternion value2)
         public static JQuaternion operator *(JQuaternion value1, JQuaternion value2)
         {
-            JQuaternion result;
-            JQuaternion.Multiply(ref value1, ref value2,out result);
+            Multiply(ref value1, ref value2, out var result);
             return result;
         }
         #endregion
@@ -319,8 +316,7 @@ namespace Jitter.LinearMath
         #region public static float operator +(JQuaternion value1, JQuaternion value2)
         public static JQuaternion operator +(JQuaternion value1, JQuaternion value2)
         {
-            JQuaternion result;
-            JQuaternion.Add(ref value1, ref value2, out result);
+            Add(ref value1, ref value2, out var result);
             return result;
         }
         #endregion
@@ -334,8 +330,7 @@ namespace Jitter.LinearMath
         #region public static float operator -(JQuaternion value1, JQuaternion value2)
         public static JQuaternion operator -(JQuaternion value1, JQuaternion value2)
         {
-            JQuaternion result;
-            JQuaternion.Subtract(ref value1, ref value2, out result);
+            Subtract(ref value1, ref value2, out var result);
             return result;
         }
         #endregion
