@@ -329,23 +329,18 @@ namespace Jitter.Dynamics
 
         protected float triangleExpansion = 0.1f;
 
-        private bool selfCollision = false;
-
-        public bool SelfCollision { get { return selfCollision; } set { selfCollision = value; } }
+        public bool SelfCollision { get; set; } = false;
 
         public float TriangleExpansion { get { return triangleExpansion; } 
             set { triangleExpansion = value; } }
 
         public float VertexExpansion { get { return sphere.Radius; } set { sphere.Radius = value; } }
 
-        private float volume = 1.0f;
         private float mass = 1.0f;
 
         internal DynamicTree<Triangle> dynamicTree = new DynamicTree<Triangle>();
         public DynamicTree<Triangle> DynamicTree { get { return dynamicTree; } }
-
-        private Material material = new Material();
-        public Material Material { get { return material; } }
+        public Material Material { get; } = new Material();
 
         JBBox box = new JBBox();
 
@@ -485,9 +480,9 @@ namespace Jitter.Dynamics
         #region AddPressureForces
         private void AddPressureForces(float timeStep)
         {
-            if (pressure == 0.0f || volume == 0.0f) return;
+            if (pressure == 0.0f || Volume == 0.0f) return;
 
-            float invVolume = 1.0f / volume;
+            float invVolume = 1.0f / Volume;
 
             foreach (Triangle t in triangles)
             {
@@ -557,7 +552,7 @@ namespace Jitter.Dynamics
 
         public virtual void DoSelfCollision(CollisionDetectedHandler collision)
         {
-            if (!selfCollision) return;
+            if (!SelfCollision) return;
 
             JVector point, normal;
             float penetration;
@@ -593,7 +588,7 @@ namespace Jitter.Dynamics
         {
             for (int i = 0; i < vertices.Count; i++)
             {
-                MassPoint point = new MassPoint(sphere, this,material);
+                MassPoint point = new MassPoint(sphere, this,Material);
                 point.Position = vertices[i];
 
                 point.Mass = 0.1f;
@@ -663,7 +658,7 @@ namespace Jitter.Dynamics
             if(!active) return;
 
             box = JBBox.SmallBox;
-            volume = 0.0f;
+            Volume = 0.0f;
             mass = 0.0f;
 
             foreach (MassPoint point in points)
@@ -693,11 +688,11 @@ namespace Jitter.Dynamics
                 JVector v2 = points[t.indices.I1].position;
                 JVector v3 = points[t.indices.I2].position;
 
-                volume -= ((v2.Y - v1.Y) * (v3.Z - v1.Z) -
+                Volume -= ((v2.Y - v1.Y) * (v3.Z - v1.Z) -
                     (v2.Z - v1.Z) * (v3.Y - v1.Y)) * (v1.X + v2.X + v3.X);
             }
 
-            volume /= 6.0f;
+            Volume /= 6.0f;
 
             AddPressureForces(timestep);
         }
@@ -717,7 +712,7 @@ namespace Jitter.Dynamics
             }
         }
 
-        public float Volume { get { return volume; } }
+        public float Volume { get; private set; } = 1.0f;
 
         public JBBox BoundingBox
         {
