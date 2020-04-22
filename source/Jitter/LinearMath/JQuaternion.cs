@@ -74,8 +74,7 @@ namespace Jitter.LinearMath
         #region public static JQuaternion Add(JQuaternion quaternion1, JQuaternion quaternion2)
         public static JQuaternion Add(JQuaternion quaternion1, JQuaternion quaternion2)
         {
-            JQuaternion result;
-            JQuaternion.Add(ref quaternion1, ref quaternion2, out result);
+            Add(ref quaternion1, ref quaternion2, out var result);
             return result;
         }
 
@@ -133,8 +132,7 @@ namespace Jitter.LinearMath
         #region public static JQuaternion Subtract(JQuaternion quaternion1, JQuaternion quaternion2)
         public static JQuaternion Subtract(JQuaternion quaternion1, JQuaternion quaternion2)
         {
-            JQuaternion result;
-            JQuaternion.Subtract(ref quaternion1, ref quaternion2, out result);
+            Subtract(ref quaternion1, ref quaternion2, out var result);
             return result;
         }
 
@@ -162,8 +160,7 @@ namespace Jitter.LinearMath
         #region public static JQuaternion Multiply(JQuaternion quaternion1, JQuaternion quaternion2)
         public static JQuaternion Multiply(JQuaternion quaternion1, JQuaternion quaternion2)
         {
-            JQuaternion result;
-            JQuaternion.Multiply(ref quaternion1, ref quaternion2, out result);
+            Multiply(ref quaternion1, ref quaternion2, out var result);
             return result;
         }
 
