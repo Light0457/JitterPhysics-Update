@@ -464,11 +464,7 @@ namespace Jitter.Collision
                 return (GJKCollide.Raycast(body.Shape, ref body.orientation, ref body.invOrientation, ref body.position,
                     ref rayOrigin, ref rayDirection, out fraction, out normal));
             }
-
-
         }
         #endregion
-
-
     }
 }

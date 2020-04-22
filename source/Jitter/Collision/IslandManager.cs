@@ -139,12 +139,9 @@ namespace Jitter.Collision
                 Pool.GiveBack(body.island);
 
                 islands.Remove(body.island);
-
                 body.island = null;
             }
-
         }
-
 
         public void RemoveAll()
         {

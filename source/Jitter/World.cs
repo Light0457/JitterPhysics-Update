@@ -447,6 +447,7 @@ namespace Jitter
 
             // remove the body from the island manager
             islands.RemoveBody(body);
+            body.Dispose();
 
             events.RaiseRemovedRigidBody(body);
 
