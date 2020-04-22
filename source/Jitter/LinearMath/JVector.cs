@@ -213,8 +213,7 @@ namespace Jitter.LinearMath
 
         public static JVector Min(JVector value1, JVector value2)
         {
-            JVector result;
-            JVector.Min(ref value1, ref value2, out result);
+            Min(ref value1, ref value2, out var result);
             return result;
         }
 
@@ -241,8 +240,7 @@ namespace Jitter.LinearMath
         #region public static JVector Max(JVector value1, JVector value2)
         public static JVector Max(JVector value1, JVector value2)
         {
-            JVector result;
-            JVector.Max(ref value1, ref value2, out result);
+            Max(ref value1, ref value2, out var result);
             return result;
         }
 
@@ -279,7 +277,7 @@ namespace Jitter.LinearMath
         #region public bool IsZero()
         public bool IsZero()
         {
-            return (this.LengthSquared() == 0.0f);
+            return LengthSquared() == 0.0f;
         }
 
         /// <summary>
@@ -288,7 +286,7 @@ namespace Jitter.LinearMath
         /// <returns>Returns true if the vector is nearly zero, otherwise false.</returns>
         public bool IsNearlyZero()
         {
-            return (this.LengthSquared() < ZeroEpsilonSq);
+            return LengthSquared() < ZeroEpsilonSq;
         }
         #endregion
 
@@ -301,8 +299,7 @@ namespace Jitter.LinearMath
         #region public static JVector Transform(JVector position, JMatrix matrix)
         public static JVector Transform(JVector position, JMatrix matrix)
         {
-            JVector result;
-            JVector.Transform(ref position, ref matrix, out result);
+            Transform(ref position, ref matrix, out var result);
             return result;
         }
 
@@ -350,7 +347,7 @@ namespace Jitter.LinearMath
         #region public static float Dot(JVector vector1, JVector vector2)
         public static float Dot(JVector vector1, JVector vector2)
         {
-            return JVector.Dot(ref vector1, ref vector2);
+            return Dot(ref vector1, ref vector2);
         }
 
 
@@ -375,8 +372,7 @@ namespace Jitter.LinearMath
         #region public static void Add(JVector value1, JVector value2)
         public static JVector Add(JVector value1, JVector value2)
         {
-            JVector result;
-            JVector.Add(ref value1, ref value2, out result);
+            Add(ref value1, ref value2, out var result);
             return result;
         }
 
@@ -407,8 +403,7 @@ namespace Jitter.LinearMath
         #region public static JVector Subtract(JVector value1, JVector value2)
         public static JVector Subtract(JVector value1, JVector value2)
         {
-            JVector result;
-            JVector.Subtract(ref value1, ref value2, out result);
+            Subtract(ref value1, ref value2, out var result);
             return result;
         }
 
@@ -439,8 +434,7 @@ namespace Jitter.LinearMath
         #region public static JVector Cross(JVector vector1, JVector vector2)
         public static JVector Cross(JVector vector1, JVector vector2)
         {
-            JVector result;
-            JVector.Cross(ref vector1, ref vector2, out result);
+            Cross(ref vector1, ref vector2, out var result);
             return result;
         }
 
@@ -520,8 +514,7 @@ namespace Jitter.LinearMath
         #region public static JVector Normalize(JVector value)
         public static JVector Normalize(JVector value)
         {
-            JVector result;
-            JVector.Normalize(ref value, out result);
+            Normalize(ref value, out var result);
             return result;
         }
 
@@ -570,8 +563,8 @@ namespace Jitter.LinearMath
         #region public float Length()
         public float Length()
         {
-            float num = ((this.X * this.X) + (this.Y * this.Y)) + (this.Z * this.Z);
-            return (float)Math.Sqrt((double)num);
+            //Fixed unneccesary value assignment
+            return (float)Math.Sqrt((double)((this.X * this.X) + (this.Y * this.Y)) + (this.Z * this.Z));
         }
         #endregion
 
@@ -609,8 +602,7 @@ namespace Jitter.LinearMath
         #region public static JVector Multiply(JVector value1, float scaleFactor)
         public static JVector Multiply(JVector value1, float scaleFactor)
         {
-            JVector result;
-            JVector.Multiply(ref value1, scaleFactor, out result);
+            Multiply(ref value1, scaleFactor, out var result);
             return result;
         }
 
@@ -637,7 +629,7 @@ namespace Jitter.LinearMath
         #region public static JVector operator %(JVector value1, JVector value2)
         public static JVector operator %(JVector value1, JVector value2)
         {
-            JVector result; JVector.Cross(ref value1, ref value2, out result);
+            Cross(ref value1, ref value2, out var result);
             return result;
         }
         #endregion
@@ -651,7 +643,7 @@ namespace Jitter.LinearMath
         #region public static float operator *(JVector value1, JVector value2)
         public static float operator *(JVector value1, JVector value2)
         {
-            return JVector.Dot(ref value1, ref value2);
+            return Dot(ref value1, ref value2);
         }
         #endregion
 
@@ -664,8 +656,7 @@ namespace Jitter.LinearMath
         #region public static JVector operator *(JVector value1, float value2)
         public static JVector operator *(JVector value1, float value2)
         {
-            JVector result;
-            JVector.Multiply(ref value1, value2,out result);
+            Multiply(ref value1, value2, out var result);
             return result;
         }
         #endregion
@@ -679,8 +670,7 @@ namespace Jitter.LinearMath
         #region public static JVector operator *(float value1, JVector value2)
         public static JVector operator *(float value1, JVector value2)
         {
-            JVector result;
-            JVector.Multiply(ref value2, value1, out result);
+            Multiply(ref value2, value1, out var result);
             return result;
         }
         #endregion
@@ -694,7 +684,7 @@ namespace Jitter.LinearMath
         #region public static JVector operator -(JVector value1, JVector value2)
         public static JVector operator -(JVector value1, JVector value2)
         {
-            JVector result; JVector.Subtract(ref value1, ref value2, out result);
+            Subtract(ref value1, ref value2, out var result);
             return result;
         }
         #endregion
@@ -708,7 +698,7 @@ namespace Jitter.LinearMath
         #region public static JVector operator +(JVector value1, JVector value2)
         public static JVector operator +(JVector value1, JVector value2)
         {
-            JVector result; JVector.Add(ref value1, ref value2, out result);
+            Add(ref value1, ref value2, out var result);
             return result;
         }
         #endregion
