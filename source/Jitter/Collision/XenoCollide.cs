@@ -380,12 +380,9 @@ namespace Jitter.Collision
                             v12 = v42;
                         }
                     }
-
-
                 }
             }
 
         }
-
     }
 }

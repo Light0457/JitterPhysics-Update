@@ -318,8 +318,11 @@ namespace Jitter.Collision
                 }
             }
 
-            threadManager.Execute();
-
+            //Only execute if multithreading.
+            if (multiThreaded)
+            {
+                threadManager.Execute();
+            }
         }
 
         private void SortCallback(object obj)
