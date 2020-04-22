@@ -20,10 +20,6 @@
 #region Using Statements
 using System;
 using System.Collections.Generic;
-
-using Jitter.Dynamics;
-using Jitter.LinearMath;
-using Jitter.Collision.Shapes;
 using System.Threading;
 #if PORTABLE
 using System.Threading.Tasks;
@@ -105,9 +101,6 @@ namespace Jitter
                 threads[i].Start();
                 initWaitHandle.WaitOne();
             }
-
-
-
         }
 
         /// <summary>

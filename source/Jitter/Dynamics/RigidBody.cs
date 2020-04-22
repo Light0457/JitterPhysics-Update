@@ -682,48 +682,6 @@ namespace Jitter.Dynamics
                 drawer.DrawTriangle(pos1, pos2, pos3);
             }
         }
-        /*
-         * internal JMatrix inertia;
-        internal JMatrix invInertia;
-
-        internal JMatrix invInertiaWorld;
-        internal JMatrix orientation;
-        internal JMatrix invOrientation;
-        internal JVector position;
-        internal JVector linearVelocity;
-        internal JVector angularVelocity;
-
-        internal Material material;
-
-        internal JBBox boundingBox;
-
-        internal float inactiveTime = 0.0f;
-
-        internal bool isActive = true;
-        internal bool isStatic = false;
-        internal bool affectedByGravity = true;
-
-        internal CollisionIsland island;
-        internal float inverseMass;
-
-        internal JVector force, torque;
-
-        private int hashCode;
-
-        internal int internalIndex = 0;
-
-        private ShapeUpdatedHandler updatedHandler;
-
-        internal List<RigidBody> connections = new List<RigidBody>();
-
-        internal HashSet<Arbiter> arbiters = new HashSet<Arbiter>();
-        internal HashSet<Constraint> constraints = new HashSet<Constraint>();
-
-        private ReadOnlyHashset<Arbiter> readOnlyArbiters;
-        private ReadOnlyHashset<Constraint> readOnlyConstraints;
-
-        internal int marker = 0;
-        */
 
         public void Dispose()
         {
